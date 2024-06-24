@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f1767f84f3a04b7a8e080ca076931c44" Name="Diagram1">
+        <EntityTypeShape EntityType="Susem_dbModel.GGG_Brigada" Width="1.5" PointX="5.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Susem_dbModel.GGG_Brigadir" Width="1.5" PointX="7.5" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Susem_dbModel.GGG_Prorab" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Susem_dbModel.GGG_Rabochiy" Width="1.5" PointX="7.5" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Susem_dbModel.GGG_Stroi_Ob" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Susem_dbModel.GGG_Users" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Susem_dbModel.GGG_Zadanie_Rabochi" Width="1.5" PointX="9.75" PointY="5.125" IsExpanded="true" />
+        <AssociationConnector Association="Susem_dbModel.FK_GGG_Brigada_GGG_Stroi_Ob" ManuallyRouted="false" />
+        <AssociationConnector Association="Susem_dbModel.FK_GGG_Brigadir_GGG_Brigada" ManuallyRouted="false" />
+        <AssociationConnector Association="Susem_dbModel.FK_GGG_Rabochiy_GGG_Brigada" ManuallyRouted="false" />
+        <AssociationConnector Association="Susem_dbModel.FK_GGG_Stroi_Ob_GGG_Prorab" ManuallyRouted="false" />
+        <AssociationConnector Association="Susem_dbModel.FK_GGG_Zadanie_Rabochi_GGG_Rabochiy" ManuallyRouted="false" />
+        <AssociationConnector Association="Susem_dbModel.FK_GGG_Stroi_Ob_GGG_Users" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

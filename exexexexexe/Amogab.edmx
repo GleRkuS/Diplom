@@ -1,0 +1,540 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище Susem_dbModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="GGG_Brigada">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Brigadir" Type="int" />
+          <Property Name="Nazvanie" Type="varchar" MaxLength="50" />
+          <Property Name="Stroi_Ob" Type="int" />
+        </EntityType>
+        <EntityType Name="GGG_Brigadir">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom_Brig" Type="int" />
+          <Property Name="Imya" Type="varchar" MaxLength="50" />
+          <Property Name="Familiya" Type="varchar" MaxLength="50" />
+          <Property Name="Otchestvo" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="GGG_Prorab">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Imya" Type="varchar" MaxLength="50" />
+          <Property Name="Familiya" Type="varchar" MaxLength="50" />
+          <Property Name="Otchestvo" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="GGG_Rabochiy">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Imya" Type="varchar" MaxLength="50" />
+          <Property Name="Familiya" Type="varchar" MaxLength="50" />
+          <Property Name="Otchestvo" Type="varchar" MaxLength="50" />
+          <Property Name="Telefon" Type="varchar" MaxLength="50" />
+          <Property Name="Nom_Brig" Type="int" />
+          <Property Name="Napravlenie" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="GGG_Stroi_Ob">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nazvanie" Type="varchar" MaxLength="50" />
+          <Property Name="Adress" Type="varchar" MaxLength="50" />
+          <Property Name="Users" Type="int" />
+          <Property Name="Prorab" Type="int" />
+        </EntityType>
+        <EntityType Name="GGG_Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+          <Property Name="role" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="GGG_Zadanie_Brigadir">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nazvanie" Type="varchar" MaxLength="50" />
+          <Property Name="Opisanie" Type="varchar" MaxLength="50" />
+          <Property Name="Data_Naznacheniya" Type="date" />
+          <Property Name="Data_Okonchaniya" Type="date" />
+          <Property Name="Status" Type="varchar" MaxLength="20" />
+          <Property Name="Brigadir" Type="int" />
+        </EntityType>
+        <EntityType Name="GGG_Zadanie_Rabochi">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nazvanie" Type="varchar" MaxLength="50" />
+          <Property Name="Opisanie" Type="varchar" MaxLength="300" />
+          <Property Name="Data_naznacheniya" Type="date" />
+          <Property Name="Data_konca" Type="date" />
+          <Property Name="Status" Type="varchar" MaxLength="20" />
+          <Property Name="Rabochi" Type="int" />
+        </EntityType>
+        <Association Name="FK_GGG_Brigada_GGG_Stroi_Ob">
+          <End Role="GGG_Stroi_Ob" Type="Self.GGG_Stroi_Ob" Multiplicity="0..1" />
+          <End Role="GGG_Brigada" Type="Self.GGG_Brigada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GGG_Stroi_Ob">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GGG_Brigada">
+              <PropertyRef Name="Stroi_Ob" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GGG_Brigadir_GGG_Brigada">
+          <End Role="GGG_Brigada" Type="Self.GGG_Brigada" Multiplicity="0..1" />
+          <End Role="GGG_Brigadir" Type="Self.GGG_Brigadir" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GGG_Brigada">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GGG_Brigadir">
+              <PropertyRef Name="Nom_Brig" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GGG_Rabochiy_GGG_Brigada">
+          <End Role="GGG_Brigada" Type="Self.GGG_Brigada" Multiplicity="0..1" />
+          <End Role="GGG_Rabochiy" Type="Self.GGG_Rabochiy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GGG_Brigada">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GGG_Rabochiy">
+              <PropertyRef Name="Nom_Brig" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GGG_Stroi_Ob_GGG_Prorab">
+          <End Role="GGG_Prorab" Type="Self.GGG_Prorab" Multiplicity="0..1" />
+          <End Role="GGG_Stroi_Ob" Type="Self.GGG_Stroi_Ob" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GGG_Prorab">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GGG_Stroi_Ob">
+              <PropertyRef Name="Prorab" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GGG_Stroi_Ob_GGG_Users">
+          <End Role="GGG_Users" Type="Self.GGG_Users" Multiplicity="0..1" />
+          <End Role="GGG_Stroi_Ob" Type="Self.GGG_Stroi_Ob" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GGG_Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GGG_Stroi_Ob">
+              <PropertyRef Name="Users" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GGG_Zadanie_Rabochi_GGG_Rabochiy">
+          <End Role="GGG_Rabochiy" Type="Self.GGG_Rabochiy" Multiplicity="0..1" />
+          <End Role="GGG_Zadanie_Rabochi" Type="Self.GGG_Zadanie_Rabochi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GGG_Rabochiy">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GGG_Zadanie_Rabochi">
+              <PropertyRef Name="Rabochi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище Susem_dbModelContainer">
+          <EntitySet Name="GGG_Brigada" EntityType="Self.GGG_Brigada" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GGG_Brigadir" EntityType="Self.GGG_Brigadir" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GGG_Prorab" EntityType="Self.GGG_Prorab" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GGG_Rabochiy" EntityType="Self.GGG_Rabochiy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GGG_Stroi_Ob" EntityType="Self.GGG_Stroi_Ob" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GGG_Users" EntityType="Self.GGG_Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GGG_Zadanie_Brigadir" EntityType="Self.GGG_Zadanie_Brigadir" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GGG_Zadanie_Rabochi" EntityType="Self.GGG_Zadanie_Rabochi" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_GGG_Brigada_GGG_Stroi_Ob" Association="Self.FK_GGG_Brigada_GGG_Stroi_Ob">
+            <End Role="GGG_Stroi_Ob" EntitySet="GGG_Stroi_Ob" />
+            <End Role="GGG_Brigada" EntitySet="GGG_Brigada" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GGG_Brigadir_GGG_Brigada" Association="Self.FK_GGG_Brigadir_GGG_Brigada">
+            <End Role="GGG_Brigada" EntitySet="GGG_Brigada" />
+            <End Role="GGG_Brigadir" EntitySet="GGG_Brigadir" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GGG_Rabochiy_GGG_Brigada" Association="Self.FK_GGG_Rabochiy_GGG_Brigada">
+            <End Role="GGG_Brigada" EntitySet="GGG_Brigada" />
+            <End Role="GGG_Rabochiy" EntitySet="GGG_Rabochiy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GGG_Stroi_Ob_GGG_Prorab" Association="Self.FK_GGG_Stroi_Ob_GGG_Prorab">
+            <End Role="GGG_Prorab" EntitySet="GGG_Prorab" />
+            <End Role="GGG_Stroi_Ob" EntitySet="GGG_Stroi_Ob" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GGG_Stroi_Ob_GGG_Users" Association="Self.FK_GGG_Stroi_Ob_GGG_Users">
+            <End Role="GGG_Users" EntitySet="GGG_Users" />
+            <End Role="GGG_Stroi_Ob" EntitySet="GGG_Stroi_Ob" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GGG_Zadanie_Rabochi_GGG_Rabochiy" Association="Self.FK_GGG_Zadanie_Rabochi_GGG_Rabochiy">
+            <End Role="GGG_Rabochiy" EntitySet="GGG_Rabochiy" />
+            <End Role="GGG_Zadanie_Rabochi" EntitySet="GGG_Zadanie_Rabochi" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Susem_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="GGG_Brigada">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Brigadir" Type="Int32" />
+          <Property Name="Nazvanie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Stroi_Ob" Type="Int32" />
+          <NavigationProperty Name="GGG_Stroi_Ob" Relationship="Self.FK_GGG_Brigada_GGG_Stroi_Ob" FromRole="GGG_Brigada" ToRole="GGG_Stroi_Ob" />
+          <NavigationProperty Name="GGG_Brigadir" Relationship="Self.FK_GGG_Brigadir_GGG_Brigada" FromRole="GGG_Brigada" ToRole="GGG_Brigadir" />
+          <NavigationProperty Name="GGG_Rabochiy" Relationship="Self.FK_GGG_Rabochiy_GGG_Brigada" FromRole="GGG_Brigada" ToRole="GGG_Rabochiy" />
+        </EntityType>
+        <EntityType Name="GGG_Brigadir">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom_Brig" Type="Int32" />
+          <Property Name="Imya" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Familiya" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Otchestvo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="GGG_Brigada" Relationship="Self.FK_GGG_Brigadir_GGG_Brigada" FromRole="GGG_Brigadir" ToRole="GGG_Brigada" />
+          <NavigationProperty Name="GGG_Zadanie_Brigadir" Relationship="Self.FK_GGG_Zadanie_Brigadir_GGG_Brigadir" FromRole="GGG_Brigadir" ToRole="GGG_Zadanie_Brigadir" />
+        </EntityType>
+        <EntityType Name="GGG_Prorab">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Imya" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Familiya" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Otchestvo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="GGG_Stroi_Ob" Relationship="Self.FK_GGG_Stroi_Ob_GGG_Prorab" FromRole="GGG_Prorab" ToRole="GGG_Stroi_Ob" />
+        </EntityType>
+        <EntityType Name="GGG_Rabochiy">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Imya" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Familiya" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Otchestvo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Telefon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nom_Brig" Type="Int32" />
+          <Property Name="Napravlenie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="GGG_Brigada" Relationship="Self.FK_GGG_Rabochiy_GGG_Brigada" FromRole="GGG_Rabochiy" ToRole="GGG_Brigada" />
+          <NavigationProperty Name="GGG_Zadanie_Rabochi" Relationship="Self.FK_GGG_Zadanie_Rabochi_GGG_Rabochiy" FromRole="GGG_Rabochiy" ToRole="GGG_Zadanie_Rabochi" />
+        </EntityType>
+        <EntityType Name="GGG_Stroi_Ob">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nazvanie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Adress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Users" Type="Int32" />
+          <Property Name="Prorab" Type="Int32" />
+          <NavigationProperty Name="GGG_Brigada" Relationship="Self.FK_GGG_Brigada_GGG_Stroi_Ob" FromRole="GGG_Stroi_Ob" ToRole="GGG_Brigada" />
+          <NavigationProperty Name="GGG_Prorab" Relationship="Self.FK_GGG_Stroi_Ob_GGG_Prorab" FromRole="GGG_Stroi_Ob" ToRole="GGG_Prorab" />
+          <NavigationProperty Name="GGG_Users" Relationship="Self.FK_GGG_Stroi_Ob_GGG_Users" FromRole="GGG_Stroi_Ob" ToRole="GGG_Users" />
+        </EntityType>
+        <EntityType Name="GGG_Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="GGG_Stroi_Ob" Relationship="Self.FK_GGG_Stroi_Ob_GGG_Users" FromRole="GGG_Users" ToRole="GGG_Stroi_Ob" />
+        </EntityType>
+        <EntityType Name="GGG_Zadanie_Brigadir">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nazvanie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Opisanie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Data_Naznacheniya" Type="DateTime" Precision="0" />
+          <Property Name="Data_Okonchaniya" Type="DateTime" Precision="0" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Brigadir" Type="Int32" />
+          <NavigationProperty Name="GGG_Brigadir" Relationship="Self.FK_GGG_Zadanie_Brigadir_GGG_Brigadir" FromRole="GGG_Zadanie_Brigadir" ToRole="GGG_Brigadir" />
+        </EntityType>
+        <EntityType Name="GGG_Zadanie_Rabochi">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nazvanie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Opisanie" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Data_naznacheniya" Type="DateTime" Precision="0" />
+          <Property Name="Data_konca" Type="DateTime" Precision="0" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Rabochi" Type="Int32" />
+          <NavigationProperty Name="GGG_Rabochiy" Relationship="Self.FK_GGG_Zadanie_Rabochi_GGG_Rabochiy" FromRole="GGG_Zadanie_Rabochi" ToRole="GGG_Rabochiy" />
+        </EntityType>
+        <Association Name="FK_GGG_Brigada_GGG_Stroi_Ob">
+          <End Role="GGG_Stroi_Ob" Type="Self.GGG_Stroi_Ob" Multiplicity="0..1" />
+          <End Role="GGG_Brigada" Type="Self.GGG_Brigada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GGG_Stroi_Ob">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GGG_Brigada">
+              <PropertyRef Name="Stroi_Ob" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GGG_Brigadir_GGG_Brigada">
+          <End Role="GGG_Brigada" Type="Self.GGG_Brigada" Multiplicity="0..1" />
+          <End Role="GGG_Brigadir" Type="Self.GGG_Brigadir" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GGG_Brigada">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GGG_Brigadir">
+              <PropertyRef Name="Nom_Brig" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GGG_Rabochiy_GGG_Brigada">
+          <End Role="GGG_Brigada" Type="Self.GGG_Brigada" Multiplicity="0..1" />
+          <End Role="GGG_Rabochiy" Type="Self.GGG_Rabochiy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GGG_Brigada">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GGG_Rabochiy">
+              <PropertyRef Name="Nom_Brig" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GGG_Zadanie_Brigadir_GGG_Brigadir">
+          <End Role="GGG_Brigadir" Type="Self.GGG_Brigadir" Multiplicity="0..1" />
+          <End Role="GGG_Zadanie_Brigadir" Type="Self.GGG_Zadanie_Brigadir" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GGG_Brigadir">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GGG_Zadanie_Brigadir">
+              <PropertyRef Name="Brigadir" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GGG_Stroi_Ob_GGG_Prorab">
+          <End Role="GGG_Prorab" Type="Self.GGG_Prorab" Multiplicity="0..1" />
+          <End Role="GGG_Stroi_Ob" Type="Self.GGG_Stroi_Ob" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GGG_Prorab">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GGG_Stroi_Ob">
+              <PropertyRef Name="Prorab" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GGG_Zadanie_Rabochi_GGG_Rabochiy">
+          <End Role="GGG_Rabochiy" Type="Self.GGG_Rabochiy" Multiplicity="0..1" />
+          <End Role="GGG_Zadanie_Rabochi" Type="Self.GGG_Zadanie_Rabochi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GGG_Rabochiy">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GGG_Zadanie_Rabochi">
+              <PropertyRef Name="Rabochi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GGG_Stroi_Ob_GGG_Users">
+          <End Role="GGG_Users" Type="Self.GGG_Users" Multiplicity="0..1" />
+          <End Role="GGG_Stroi_Ob" Type="Self.GGG_Stroi_Ob" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GGG_Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GGG_Stroi_Ob">
+              <PropertyRef Name="Users" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Susem_dbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="GGG_Brigada" EntityType="Self.GGG_Brigada" />
+          <EntitySet Name="GGG_Brigadir" EntityType="Self.GGG_Brigadir" />
+          <EntitySet Name="GGG_Prorab" EntityType="Self.GGG_Prorab" />
+          <EntitySet Name="GGG_Rabochiy" EntityType="Self.GGG_Rabochiy" />
+          <EntitySet Name="GGG_Stroi_Ob" EntityType="Self.GGG_Stroi_Ob" />
+          <EntitySet Name="GGG_Users" EntityType="Self.GGG_Users" />
+          <EntitySet Name="GGG_Zadanie_Brigadir" EntityType="Self.GGG_Zadanie_Brigadir" />
+          <EntitySet Name="GGG_Zadanie_Rabochi" EntityType="Self.GGG_Zadanie_Rabochi" />
+          <AssociationSet Name="FK_GGG_Brigada_GGG_Stroi_Ob" Association="Self.FK_GGG_Brigada_GGG_Stroi_Ob">
+            <End Role="GGG_Stroi_Ob" EntitySet="GGG_Stroi_Ob" />
+            <End Role="GGG_Brigada" EntitySet="GGG_Brigada" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GGG_Brigadir_GGG_Brigada" Association="Self.FK_GGG_Brigadir_GGG_Brigada">
+            <End Role="GGG_Brigada" EntitySet="GGG_Brigada" />
+            <End Role="GGG_Brigadir" EntitySet="GGG_Brigadir" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GGG_Rabochiy_GGG_Brigada" Association="Self.FK_GGG_Rabochiy_GGG_Brigada">
+            <End Role="GGG_Brigada" EntitySet="GGG_Brigada" />
+            <End Role="GGG_Rabochiy" EntitySet="GGG_Rabochiy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GGG_Zadanie_Brigadir_GGG_Brigadir" Association="Self.FK_GGG_Zadanie_Brigadir_GGG_Brigadir">
+            <End Role="GGG_Brigadir" EntitySet="GGG_Brigadir" />
+            <End Role="GGG_Zadanie_Brigadir" EntitySet="GGG_Zadanie_Brigadir" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GGG_Stroi_Ob_GGG_Prorab" Association="Self.FK_GGG_Stroi_Ob_GGG_Prorab">
+            <End Role="GGG_Prorab" EntitySet="GGG_Prorab" />
+            <End Role="GGG_Stroi_Ob" EntitySet="GGG_Stroi_Ob" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GGG_Zadanie_Rabochi_GGG_Rabochiy" Association="Self.FK_GGG_Zadanie_Rabochi_GGG_Rabochiy">
+            <End Role="GGG_Rabochiy" EntitySet="GGG_Rabochiy" />
+            <End Role="GGG_Zadanie_Rabochi" EntitySet="GGG_Zadanie_Rabochi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GGG_Stroi_Ob_GGG_Users" Association="Self.FK_GGG_Stroi_Ob_GGG_Users">
+            <End Role="GGG_Users" EntitySet="GGG_Users" />
+            <End Role="GGG_Stroi_Ob" EntitySet="GGG_Stroi_Ob" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище Susem_dbModelContainer" CdmEntityContainer="Susem_dbEntities">
+          <EntitySetMapping Name="GGG_Brigada">
+            <EntityTypeMapping TypeName="Susem_dbModel.GGG_Brigada">
+              <MappingFragment StoreEntitySet="GGG_Brigada">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Brigadir" ColumnName="Brigadir" />
+                <ScalarProperty Name="Nazvanie" ColumnName="Nazvanie" />
+                <ScalarProperty Name="Stroi_Ob" ColumnName="Stroi_Ob" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GGG_Brigadir">
+            <EntityTypeMapping TypeName="Susem_dbModel.GGG_Brigadir">
+              <MappingFragment StoreEntitySet="GGG_Brigadir">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nom_Brig" ColumnName="Nom_Brig" />
+                <ScalarProperty Name="Imya" ColumnName="Imya" />
+                <ScalarProperty Name="Familiya" ColumnName="Familiya" />
+                <ScalarProperty Name="Otchestvo" ColumnName="Otchestvo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GGG_Prorab">
+            <EntityTypeMapping TypeName="Susem_dbModel.GGG_Prorab">
+              <MappingFragment StoreEntitySet="GGG_Prorab">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Imya" ColumnName="Imya" />
+                <ScalarProperty Name="Familiya" ColumnName="Familiya" />
+                <ScalarProperty Name="Otchestvo" ColumnName="Otchestvo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GGG_Rabochiy">
+            <EntityTypeMapping TypeName="Susem_dbModel.GGG_Rabochiy">
+              <MappingFragment StoreEntitySet="GGG_Rabochiy">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Imya" ColumnName="Imya" />
+                <ScalarProperty Name="Familiya" ColumnName="Familiya" />
+                <ScalarProperty Name="Otchestvo" ColumnName="Otchestvo" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="Nom_Brig" ColumnName="Nom_Brig" />
+                <ScalarProperty Name="Napravlenie" ColumnName="Napravlenie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GGG_Stroi_Ob">
+            <EntityTypeMapping TypeName="Susem_dbModel.GGG_Stroi_Ob">
+              <MappingFragment StoreEntitySet="GGG_Stroi_Ob">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nazvanie" ColumnName="Nazvanie" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
+                <ScalarProperty Name="Users" ColumnName="Users" />
+                <ScalarProperty Name="Prorab" ColumnName="Prorab" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GGG_Users">
+            <EntityTypeMapping TypeName="Susem_dbModel.GGG_Users">
+              <MappingFragment StoreEntitySet="GGG_Users">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="role" ColumnName="role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GGG_Zadanie_Brigadir">
+            <EntityTypeMapping TypeName="Susem_dbModel.GGG_Zadanie_Brigadir">
+              <MappingFragment StoreEntitySet="GGG_Zadanie_Brigadir">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nazvanie" ColumnName="Nazvanie" />
+                <ScalarProperty Name="Opisanie" ColumnName="Opisanie" />
+                <ScalarProperty Name="Data_Naznacheniya" ColumnName="Data_Naznacheniya" />
+                <ScalarProperty Name="Data_Okonchaniya" ColumnName="Data_Okonchaniya" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Brigadir" ColumnName="Brigadir" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GGG_Zadanie_Rabochi">
+            <EntityTypeMapping TypeName="Susem_dbModel.GGG_Zadanie_Rabochi">
+              <MappingFragment StoreEntitySet="GGG_Zadanie_Rabochi">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nazvanie" ColumnName="Nazvanie" />
+                <ScalarProperty Name="Opisanie" ColumnName="Opisanie" />
+                <ScalarProperty Name="Data_naznacheniya" ColumnName="Data_naznacheniya" />
+                <ScalarProperty Name="Data_konca" ColumnName="Data_konca" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Rabochi" ColumnName="Rabochi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
